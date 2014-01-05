@@ -31,52 +31,339 @@
           <h3>
 <a name="welcome-to-github-pages" class="anchor" href="#welcome-to-github-pages"><span class="octicon octicon-link"></span></a>Witaj na moim blogu</h3>
 
-<p>This automatic page generator is the easiest way to create beautiful pages for all of your projects. Author your page content here using GitHub Flavored Markdown, select a template crafted by a designer, and publish. After your page is generated, you can check out the new branch:</p>
+<p>Blog zostanie poświęcony moim dwóm zainteresowaniom: programowaniu prostych gier, interesujących programów i rysowaniu mangi.Chciałbym także pokazać moje rozwiązania na temat problemu programistycznego i . W miare rozwoju blogu bedziecie mogli ujrzeć jak moje umiejętności w obu dziedzinach idą w górę. </p>
 
-<pre><code>$ cd your_repo_root/repo_name
-$ git fetch origin
-$ git checkout gh-pages
+
+
+
+<h3>
+<a name="designer-templates" class="anchor" href="#designer-templates"><span class="octicon octicon-link"></span></a>Gra Snake.</h3>
+
+<p>Otóż nadeszły święta. Jako iż studiuje informatyke, postanowiłem iść w kierunku moich ambicji i napisać swoją pierwszą w pełni działającą gre. Mam małą jak narazie wiedze na temat programowania, zatem gre umieściłem w konsoli. Do tego celu użyłem starej biblioteki conio2.h. Dlaczego ją? Otóż miałem z nią pewne doświadczenia juz w liceum. Skoro ta biblioteka nie sprawiała mi problemów, to postanowiłem jej użyć. Chciałbym dodać, że program w pełni sam wymyśliłem. Oto kod programu. </p>
+
+<pre><code> 
+#include< stdio.h >
+#include< conio2.h >
+#include< stdlib.h >
+#include< time.h >
+
+
+void przegrana()
+{
+     clrscr();
+     gotoxy(32,12);    
+     textcolor(DARKGRAY);
+     printf("PRZEGRALES");
+     getch();
+     }
+
+
+
+void napis1(){
+          gotoxy(1,8);
+          textcolor(LIGHTMAGENTA);
+
+printf("|----------|   |--|   |--|   |----------|  |--|      *--*  |----------|\n");
+printf("|          |   |  |   |  |   |          |  |  |     *  *   |          |\n");
+printf("|          |   |  |   |  |   |  |----|  |  |  |    *  *    |          |\n");
+printf("|   |------|   |   *  |  |   |  |    |  |  |  |   *  *     |  |-------|\n");
+printf("|   |          |    * |  |   |  |    |  |  |  |  *  *      |  |\n");
+printf("|   |          |     *|  |   |  |----|  |  |  | *  *       |  |\n");
+printf("|   |------|   |         |   |          |  |  |*  *        |  |-------|\n");
+printf("|          |   |         |   |          |  |     *         |          |\n");
+printf("|          |   |         |   |  |----|  |  |     *         |          |\n");
+printf("|------|   |   |         |   |  |    |  |  |      *        |  |-------|\n");
+printf("       |   |   |         |   |  |    |  |  |  |*   *       |  |\n");
+printf("       |   |   |  |*     |   |  |    |  |  |  | *   *      |  | \n");
+printf("|------|   |   |  | *    |   |  |    |  |  |  |  *   *     |  |-------|\n");
+printf("|          |   |  |  *   |   |  |    |  |  |  |   *   *    |          |\n");
+printf("|          |   |  |   *  |   |  |    |  |  |  |    *   *   |          |\n");
+printf("|----------|   |--|   |--|   |--|    |--|  |--|     *---*  |----------|\n");
+}
+void menu1(){
+     clrscr();
+     gotoxy(35, 3);
+     textcolor(YELLOW);
+     printf("GRAJ");
+     gotoxy(35,4);
+     textcolor(WHITE);
+     printf("AUTOR");
+     gotoxy(35,5);
+     printf("WYJSCIE");
+     napis1();
+
+}
+void menu2(){
+     clrscr();
+     gotoxy(35, 3);
+     textcolor(WHITE);
+     printf("GRAJ");
+     gotoxy(35,4);
+     textcolor(YELLOW);
+     printf("AUTOR");
+     gotoxy(35,5);
+     textcolor(WHITE);
+     printf("WYJSCIE");
+     napis1();
+}
+
+void menu3(){
+     clrscr();
+     gotoxy(35, 3);
+     textcolor(WHITE);
+     printf("GRAJ");
+     gotoxy(35,4);
+     printf("AUTOR");
+     gotoxy(35,5);
+     textcolor(YELLOW);
+     printf("WYJSCIE");
+     napis1();
+}
+
+void autor(){
+clrscr();
+gotoxy(25,13);
+printf("Gre napisal Pawel Sobocinski.");
+gotoxy(25,14);
+printf("Ze szczegolna dedykacja dla Ani.");
+getch();
+}  
+
+
+
+void plansza(){
+     textcolor(WHITE);
+     int x,y;
+gotoxy(1,1);
+printf("==========================================================================
+======");
+for (y=2;y<24;y++)
+{
+    gotoxy(1,y);
+printf("*");
+}
+gotoxy(1,24);
+printf("==========================================================================
+======");
+
+gotoxy(80,2);
+for (y=2;y<24;y++)
+{
+gotoxy(80,y);
+printf("*");           
+}         
+}
+
+
+
+
+void gra(){
+          int x=40, y=13, px, py, score=0, nx[100], ny[100], i;  
+// nx i py to wspolrzedne jedzenia a nx i ny to wspolrzedne ogona
+          char a; // zmienna dzieki ktorej mozna sterowac!
+    for (i=0;i<100;i++)
+    {
+        nx[i]=0;
+        ny[i]=0;
+        }
+// Tworzenie pierwszego jedzenia!
+                   px=rand()%79+2;
+                   py=rand()%23+2;
+                   gotoxy(px,py);
+                   textcolor(LIGHTMAGENTA);
+                   printf("$");
+
+
+textcolor(GREEN);          
+gotoxy(x,y);     
+printf("O");  
+i=0;        
+while(a!=27)         //Gra rozpoczęta! 
+            {
+                for(i=98;i>=0;i--)   // zapamietywanie ogona.
+                     {
+                                       nx[i+1]=nx[i];
+                                       ny[i+1]=ny[i];
+                                       }
+                                       nx[0]=x;
+                                       ny[0]=y;
+
+
+while(kbhit())    
+ a=getch();
+             if(a==72)   //gora
+             {
+             clrscr();
+             y--;
+             gotoxy(x,y);
+             textcolor(GREEN);  
+             printf("O");
+             plansza();
+             textcolor(LIGHTMAGENTA);
+
+            }
+                         if(a==80)  //dol
+             {
+             clrscr();
+             y++;
+             gotoxy(x,y);
+             textcolor(GREEN);  
+             printf("O");
+             plansza();
+             textcolor(LIGHTMAGENTA);
+
+
+            }
+                                     if(a==77)  //prawo
+             {
+             clrscr();
+             x++;
+             gotoxy(x,y);
+             textcolor(GREEN);  
+             printf("O");
+             plansza();
+             textcolor(LIGHTMAGENTA);
+
+            }  
+                                                 if(a==75)  //lewo
+             {
+             clrscr();
+             x--;
+             gotoxy(x,y);
+             textcolor(GREEN);  
+             printf("O");
+             plansza();
+             textcolor(LIGHTMAGENTA);
+
+            }
+            for(i=0;i<100;i++)
+            {
+                              if(score>=i+1)
+                              {          // kolizja z ogonem i tworzenie ogona.
+                                            if(x==nx[i] && y==ny[i])    
+                                            { przegrana();}
+
+                                            gotoxy(nx[i],ny[i]);   
+                                            printf("O");
+                                            }
+                                            }
+
+
+      gotoxy(45,25);
+      printf("WYNIK: %d",score*5);
+
+
+//Kolizja o sciany planszy.
+            if(x<=1 || x>=80 || y>=24 || y<=1)     
+			
+            {
+
+
+            przegrana();
+
+             }
+        if(px==x && py==y)
+        { 
+                 do
+                 {
+                 srand(time(NULL));
+                 px=rand()%79;
+                 py=rand()%23;
+
+                 }
+                 while( px<=1 || px>=80 || py>=24 || py<=1);
+                 score++;
+                 } // Warunek zjedzonego jedzenia.
+                 gotoxy(px,py);
+                 printf("$");
+
+                delay(200);                                   
+}
+}
+
+
+
+int main()
+{
+    char a;   // zmienna zbierajaca klawisze
+    int y=3;    // zmienna zbierajaca "wartosc" klawiszy
+textbackground(BLUE);
+menu1();
+while (a!=27)
+{
+ a=getch();
+      if( y==3 && a==80)
+      {
+      y--;
+      clrscr();
+      menu2();
+      a=0;
+}
+      if( y==2 && a==80)
+      {
+      y--;
+      clrscr();
+      menu3();
+      a=0;
+}
+      if( y==1 && a==80)
+      {
+      y=3;
+      menu1();
+      a=0;
+      }
+            if( y==1 && a==72)
+      {
+      y++;
+      clrscr();
+      menu2();
+      a=0;
+}
+            if( y==2 && a==72)
+      {
+      y++;
+      clrscr();
+      menu1();
+      a=0;
+}
+            if( y==3 && a==72)
+      {
+      y=1;
+      clrscr();
+      menu3();
+      a=0;
+}                  
+}
+if(y==2)
+{
+autor();
+main();
+}
+if(y==3)
+{
+        clrscr();
+plansza();
+gra();
+main();        
+}
+return 0;
+}/*
 </code></pre>
 
-<p>If you're using the GitHub for Mac, simply sync your repository and you'll see the new branch.</p>
+<p> Miałem dwa główne problemy z stworzeniem tej gry, program zatrzymywał się by wczytać zmienną i podążanie ogona. W rozwiązaniu pierwszego programu pomogła komenda kbhit, która sprawdza czy dany klawisz jest wcisnięty. Jeśli tak to program wchodzi w pętle w, której pobiera zmienna i bedzie w niej dopóki klawisz nie zostanie puszczony. Drugi program rozwiązałem na zasadzie zapamiętywania poprzednych współrzędnych głowy węża.</p>
+
 
 <h3>
-<a name="designer-templates" class="anchor" href="#designer-templates"><span class="octicon octicon-link"></span></a>Designer Templates</h3>
+<a name="rather-drive-stick" class="anchor" href="#rather-drive-stick"><span class="octicon octicon-link"></span></a>Partia rysunków</h3>
+<p> Wolny czas to dla mnie czas kiedy moge w pełni zaangażować się w swoje zainteresowania i rozwinąć je. Jak zwykle wykonałem kilka moich rysunków. Co prawda nie jestem jakiś bardzo dobry w tym, ale trening czyni mistrza.</p>
+<img src='http://imagizer.imageshack.us/v2/150x100q90/809/ceyh.jpg' border='0'>
+<p>Kallen z code geass</p>
+<img src='http://imagizer.imageshack.us/v2/150x100q90/11/vwfh.jpg' border='0'>
+<p> Renji z Bleacha. Bardzo lubie styl rysowania z tego anime.</p>
 
-<p>We've crafted some handsome templates for you to use. Go ahead and continue to layouts to browse through them. You can easily go back to edit your page before publishing. After publishing your page, you can revisit the page generator and switch to another theme. Your Page content will be preserved if it remained markdown format.</p>
 
-<h3>
-<a name="rather-drive-stick" class="anchor" href="#rather-drive-stick"><span class="octicon octicon-link"></span></a>Rather Drive Stick?</h3>
 
-<p>If you prefer to not use the automatic generator, push a branch named <code>gh-pages</code> to your repository to create a page manually. In addition to supporting regular HTML content, GitHub Pages support Jekyll, a simple, blog aware static site generator written by our own Tom Preston-Werner. Jekyll makes it easy to create site-wide headers and footers without having to copy them across every page. It also offers intelligent blog support and other advanced templating features.</p>
 
-<h3>
-<a name="authors-and-contributors" class="anchor" href="#authors-and-contributors"><span class="octicon octicon-link"></span></a>Authors and Contributors</h3>
-
-<p>You can <a href="https://github.com/blog/821" class="user-mention">@mention</a> a GitHub username to generate a link to their profile. The resulting <code>&lt;a&gt;</code> element will link to the contributor's GitHub Profile. For example: In 2007, Chris Wanstrath (<a href="https://github.com/defunkt" class="user-mention">@defunkt</a>), PJ Hyett (<a href="https://github.com/pjhyett" class="user-mention">@pjhyett</a>), and Tom Preston-Werner (<a href="https://github.com/mojombo" class="user-mention">@mojombo</a>) founded GitHub.</p>
-
-<h3>
-<a name="support-or-contact" class="anchor" href="#support-or-contact"><span class="octicon octicon-link"></span></a>Support or Contact</h3>
-
-<p>Having trouble with Pages? Check out the documentation at <a href="http://help.github.com/pages">http://help.github.com/pages</a> or contact <a href="mailto:support@github.com">support@github.com</a> and we’ll help you sort it out.</p>
-        </section>
-
-        <aside id="sidebar">
-          <a href="https://github.com/Redellex/First/zipball/master" class="button">
-            <small>Download</small>
-            .zip file
-          </a>
-          <a href="https://github.com/Redellex/First/tarball/master" class="button">
-            <small>Download</small>
-            .tar.gz file
-          </a>
-
-          <p class="repo-owner"><a href="https://github.com/Redellex/First"></a> is maintained by <a href="https://github.com/Redellex">Redellex</a>.</p>
-
-          <p>This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the Architect theme by <a href="https://twitter.com/jasonlong">Jason Long</a>.</p>
-        </aside>
-      </div>
-    </div>
 
             <script type="text/javascript">
             var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
